@@ -1,8 +1,8 @@
-from flask import Flask
+from flask import Flask, request, jsonify
 app = Flask(__name__, static_folder = "public")
 
-@app.route('/<name>', methods = ['POST', 'PUT'])    
+@app.route('/<name>', methods = ['GET','POST', 'PUT'])    
  
 def hello(name):
-    return app.send_static_file('main.html')
+    return jsonify(name = name)
 
