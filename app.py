@@ -1,6 +1,7 @@
 from flask import Flask
-app = Flask(__name__)
+app = Flask(__name__, static_folder = "public")
 
-@app.route("/<name>")
-def hello(name):
-    return "<h1>Hello " + name + "!</h1>"
+@app.route("/")
+def hello():
+    return app.send_static_file('main.html')
+
