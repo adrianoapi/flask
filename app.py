@@ -6,7 +6,6 @@ app = Flask(__name__, static_folder = "public")
 app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://root:@localhost/flask"
 db = SQLAlchemy(app)
 
-# User model
 class User(db.Model):
     id       = db.Column(db.Integer, primary_key = True)
     username = db.Column(db.String(120))
@@ -19,9 +18,8 @@ class User(db.Model):
 
 @app.route('/<name>', methods = ['GET','POST', 'PUT'])    
 def hello(name):
-    abort(404)
-    return redirect(url_for('/'))
-    #return render_template('hello.html', name = name)
+    users = User.query.all()
+    return jsonify(users = users)
 
 @app.route('/')
 def root():
